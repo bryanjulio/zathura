@@ -63,25 +63,35 @@ const Home = () => {
 
   // Função para lidar com o clique no botão Next e mudar o conteúdo do card
   const handleNextClick = () => {
-    if (cardStep === 1) {
-      setCardStep(2); // Avança para o próximo passo do card
-      setAstronautReaction("pointing"); // Muda a reação do astronauta para "pointing"
-    } else {
-      // Aqui implementamos o fade-out do astronauta
-      setAstronautVisible(false); // Inicia o fade-out do astronauta
-      setTimeout(() => {
-        setShowInfoCard(false); // Após o fade-out, esconde o card
-        setStartZoom(true); // Ativa o zoom
+    setCardStep((prevStep) => {
+      if (prevStep === 1) {
+        setAstronautReaction("pointing");
+        return 2;
+      } else if (prevStep === 2) {
+        setAstronautReaction("thumbsUp");
+        return 3;
+      }  else if (prevStep === 3) {
+        // Aqui implementamos o fade-out do astronauta
+        setAstronautVisible(false); // Inicia o fade-out do astronauta
         setTimeout(() => {
-          setCanControlView(true); // Habilita o controle da câmera depois do zoom
-        }, 3000); // Tempo para a animação de zoom
-      }, 1000); // Tempo para a animação de fade-out do astronauta
-    }
+          setShowInfoCard(false); // Após o fade-out, esconde o card
+          setStartZoom(true); // Ativa o zoom
+          setTimeout(() => {
+            setCanControlView(true); // Habilita o controle da câmera depois do zoom
+          }, 3000); // Tempo para a animação de zoom
+        }, 1000); // Tempo para a animação de fade-out do astronauta
+        return prevStep; // Não incrementa mais o cardStep, já que estamos no último passo
+      } else {
+        return prevStep;
+      }
+    });
   };
+  
+  
 
   return (
     <div className="app-container">
-      <Link to="/about" className="top-right-link">
+      <Link to="/about" className="about-btn">
         About
       </Link>
       <Canvas camera={{ position: [0, 50, 150], far: 200000 }}>
@@ -110,73 +120,87 @@ const Home = () => {
       )}
 
       {!hasStarted && (
-        <p className="start-text">Press any key or click to start</p>
+        <TypeAnimation className="start-text"
+        key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+        sequence={[
+          'Press any key or click to start', // Texto a ser escrito
+          1000, // Pausa de 1 segundo
+        ]}
+        speed={75}
+        wrapper="span"
+        cursor={true}  // Mostra o cursor piscando
+        repeat={0}  // Não repete a animação
+      />
       )}
 
-      {/*{showInfoCard && (
-        <div className="info-card">
-          <h2>
-            {" "}
-            <TypeAnimation
-              sequence={[
-                "One", // Types 'One'
-                1000, // Waits 1s
-                "Two", // Deletes 'One' and types 'Two'
-                2000, // Waits 2s
-                "Two Three", // Types 'Three' without deleting 'Two'
-                () => {
-                  console.log("Sequence completed"); // Place optional callbacks anywhere in the array
-                },
-              ]}
-              wrapper="span"
-              cursor={true}
-              repeat={Infinity}
-              style={{ fontSize: "2em", display: "inline-block" }}
-            />
-          </h2>
-          <p>
-            Here you can explore the solar system. Use the controls to navigate
-            through space!
-          </p>
-          <button onClick={handleNextClick}>Next</button>
-        </div>
-      )}*/}
+      
       {showInfoCard && (
+  <>
+    <div className="info-card">
+      {/* O conteúdo do card muda de acordo com o cardStep */}
+      {cardStep === 1 ? (
         <>
-          <div className="info-card">
-            {/* O conteúdo do card muda de acordo com o cardStep */}
-            {cardStep === 1 ? (
-              <>
-                <TypeAnimation
-                    sequence={[
-                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat',
-                    3000,
-                    '',
-                    ]}
-                    speed={{ type: 'keyStrokeDelayInMs', value: 30 }}
-                    style={{ fontSize: '1em', display: 'block', minHeight: '200px' }}
-                />
-              </>
-            ) : (
-              <>
-                <TypeAnimation
-                    splitter={(str) => str.split(/(?= )/)} // 'Lorem ipsum dolor' -> ['Lorem', ' ipsum', ' dolor']
-                    sequence={[
-                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-                    3000,
-                    '',
-                    ]}
-                    speed={{ type: 'keyStrokeDelayInMs', value: 30 }}
-                    omitDeletionAnimation={true}
-                    style={{ fontSize: '1em', display: 'block', minHeight: '200px' }}
-                    repeat={Infinity}
-                />
-              </>
-            )}
-            <button onClick={handleNextClick}>Next</button>
-          </div>
+          <TypeAnimation
+            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+            sequence={[
+              'Hi there! I’m Walter, your guide on this space adventure. Today, we’re going to explore distant planets and discover new worlds through the HWO, NASA’s newest telescope. It’s designed to find Earth-like planets around nearby stars and search for signs of life. Ready to dive in?', // Texto a ser escrito
+              1000, // Pausa de 1 segundo
+            ]}
+            speed={75}
+            wrapper="span"
+            cursor={true}  // Mostra o cursor piscando
+            repeat={0}  // Não repete a animação
+          />
+        </>
+      ) : cardStep === 2 ? (
+        <>
+          <TypeAnimation
+            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+            sequence={[
+              'The HWO is positioned at Lagrange Point 2 (L2), 1.5 million km from Earth, where it has a perfect view of deep space.', // Novo texto da segunda etapa
+              1000, // Pausa de 1 segundo
+            ]}
+            speed={75}
+            wrapper="span"
+            cursor={true}
+            repeat={0}
+          />
+        </>
+      ) : cardStep === 3 ? (
+        <>
+          <TypeAnimation
+            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+            sequence={[
+              'In this app, you’ll explore exoplanets through HWO’s eyes, learning about planets that might support life. Join me on a guided tour or explore freely!', // Novo texto da terceira etapa
+              1000,
+            ]}
+            speed={75}
+            wrapper="span"
+            cursor={true}
+            repeat={0}
+          />
+        </>
+      ) : (
+        <>
+          <TypeAnimation
+            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+            sequence={[
+              'All steps are completed.', // Texto quando todas as etapas são concluídas
+              1000,
+            ]}
+            speed={75}
+            wrapper="span"
+            cursor={false}  // Cursor desaparece ao final
+            repeat={0}
+          />
         </>
       )}
+      <button className="fixed-btn" onClick={handleNextClick}>Next</button>
+    </div>
+  </>
+)}
+
+
 
       {/* Exibe a animação do astronauta */}
       {showInfoCard && (
@@ -188,8 +212,8 @@ const Home = () => {
 
       {canControlView && (
         <div className="controls">
-          <button className="control-btn">Livre</button>
-          <button className="control-btn">Tour Guiada</button>
+          <button className="btn">Guided Tour</button>
+          <button className="btn">Free Navigation</button>
         </div>
       )}
     </div>
