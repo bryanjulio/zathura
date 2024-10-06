@@ -7,7 +7,7 @@ export const useTrails = () => useContext(TrailContext);
 
 export const TrailProvider = ({ children }) => {
   const [trails, setTrails] = useState({});
-  const MAX_TRAIL_AGE = 20000; // Maximum age of trail points in milliseconds
+  const MAX_TRAIL_AGE = 8000; // Maximum age of trail points in milliseconds
 
   const addTrailPoint = useCallback((key, position) => {
     setTrails((prevTrails) => {
@@ -46,12 +46,25 @@ export const TrailProvider = ({ children }) => {
     <TrailContext.Provider value={{ addTrailPoint, clearTrail }}>
       {children}
       {Object.entries(trails).map(([key, trailPoints]) => (
-        <Line
-          key={key}
-          points={trailPoints.map((point) => point.position)}
-          color="rgba(30,30,30)"
-        />
+        <TrailLine key={key} trailPoints={trailPoints} />
       ))}
     </TrailContext.Provider>
+  );
+};
+
+// Comet-like Trail Line Component
+const TrailLine = ({ trailPoints }) => {
+  return (
+    <group>
+      {trailPoints.map((point, index) => {
+        const size = ( index * trailPoints.length) / 50000; // Adjust size based on index
+        return (
+          <mesh key={index} position={point.position}>
+            <sphereGeometry args={[size, 8, 8]} />
+            <meshBasicMaterial color="rgba(100, 100, 100)" />
+          </mesh>
+        );
+      })}
+    </group>
   );
 };

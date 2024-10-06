@@ -11,9 +11,11 @@ const Scene = () => {
     useGravity()
     return (    
         <CameraProvider>
-            <Sun />
-            <Earth />
-            <Stars />
+                <Sun />
+                <TrailProvider>
+                    <Earth />    
+                </TrailProvider> 
+                <Stars />
         </CameraProvider>
     )
 }
