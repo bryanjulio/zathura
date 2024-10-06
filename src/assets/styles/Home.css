@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+body {
+  background-color: black;
+}
+
 .app-container, .about-container {
   position: relative;
   width: 100vw;
@@ -9,31 +19,72 @@
   bottom: 5%; /* Posição na parte inferior da tela */
   left: 50%;
   transform: translateX(-50%); /* Centraliza horizontalmente */
-  font-size: 20px;
+  font-size: 14px;
   color: white;
-  font-family: 'Arial', sans-serif;
   letter-spacing: 1.5px;
   z-index: 20; /* Garante que o texto fique acima do overlay */
 }
 
 .info-card {
   position: absolute;
-  top: 40%;
-  left: 70%; /* Diminuí o valor de 45% para 40% para mover mais à esquerda */
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
+  bottom: 80px; /* Posiciona o card perto da parte inferior */
+  right: 30px; /* Alinha o card à direita da tela */
+  background: rgba(0, 0, 50, 0.8); /* Fundo translúcido com tema espacial */
   color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 300px;
-  z-index: 20;
+  padding: 40px 40px 60px 40px;
+  border-radius: 15px; /* Bordas arredondadas suaves */
+  border: 2px solid rgba(255, 255, 255, 0.6); /* Borda suave branca */
+  text-align: left; /* Alinhar o texto à esquerda */
+  width: 40%; /* O card cobre 60% da largura da tela */
+  z-index: 20; /* Fonte 8-bit */;
+  font-size: 16px; /* Tamanho da fonte confortável para leitura */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra leve para dar profundidade */
+  line-height: 25px;
 }
 
 
+.info-card-content {
+  margin-bottom: 50px; /* Garante que o botão não sobreponha o texto */
+}
+
+.about-btn {
+  text-decoration: none;
+  position: fixed; 
+  top: 30px; 
+  right: 30px;
+  background-color: #1a1a40;
+  color: white;
+  border: 2px solid #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 25;
+}
+
+.about-btn:hover {
+  background-color: #333366;
+}
+
+/* Botões dentro do contêiner de controles */
+.controls .btn {
+  background-color: #1a1a40;
+  color: white;
+  border: 2px solid #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.controls .btn:hover {
+  background-color: #333366; /* Efeito de hover com uma cor mais clara */
+}
+
+/* Botões de controle, como "Livre" e "Tour Guiada", centralizados */
 .controls {
   position: absolute;
-  bottom: 10%;
+  bottom: 10%; /* Posiciona o contêiner dos botões 10% acima da parte inferior */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -41,17 +92,25 @@
   z-index: 20;
 }
 
-.control-btn {
-  padding: 10px 20px;
-  background-color: white;
-  border: none;
+/* Botão fixo no canto inferior direito */
+.fixed-btn {
+  position: fixed; /* Fixa o botão na tela, independentemente do conteúdo */
+  bottom: 30px; /* 10px a partir da parte inferior */
+  right: 30px; /* 10px a partir da direita */
+  background-color: #1a1a40;
+  color: white;
+  border: 2px solid #ffffff;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 12px;
 }
 
-.control-btn:hover {
-  background-color: lightgray;
+.fixed-btn:hover {
+  background-color: #333366; /* Efeito de hover com uma cor mais clara */
 }
+
+
 
 /* Animação de pulsação */
 @keyframes pulse {
@@ -87,22 +146,6 @@
   pointer-events: none; /* Desabilita interação com o overlay após desaparecer */
 }
 
-/* Estilos gerais para Home e About */
-.top-right-link {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 18px;
-  color: white;  /* Garanta que seja branco */
-  text-decoration: none;
-  z-index: 100;  /* Para garantir que fique à frente de outros elementos */
-  transition: text-shadow 0.3s ease;
-}
-
-
-.top-right-link:hover {
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Brilho ao passar o mouse */
-}
 
 .astronaut-animation {
   position: absolute;
