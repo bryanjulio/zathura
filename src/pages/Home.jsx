@@ -7,14 +7,7 @@ import Scene from "../components/Scene";
 import '../assets/styles/Home.css';
 import { Link } from 'react-router-dom';
 import AnimatedSpriteTalking from '../components/AnimatedSpriteTalking'; // Importa corretamente o componente de animação
-import React, { useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { Physics } from "@react-three/rapier";
-import Scene from "../components/Scene";
-import "../assets/styles/Home.css";
-import { TypeAnimation } from "react-type-animation";
+
 
 const FocusOnSunWithZoom = () => {
     const { camera } = useThree();
