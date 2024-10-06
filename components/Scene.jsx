@@ -4,6 +4,7 @@ import { CameraProvider } from '../context/Camera'
 import { TrailProvider } from '../context/Trails'
 
 import Sun from './Sun'
+import Earth from './Earth'
 import Stars from './Stars'
 import Planets from './Planets'
 
@@ -17,14 +18,17 @@ const Scene = () => {
            
                 <Sun />
 
-                <TrailProvider>
-                    <Planets />
-                </TrailProvider>
+                <Earth />
 
                 <Stars />
        
         </CameraProvider>
     )
+    /*
+        <TrailProvider>
+            <Planets />
+        </TrailProvider>
+    */ 
 }
 
 export default Scene
