@@ -25,3 +25,13 @@ export const calculateInitialVelocity = (position, respawn) => {
 
     return velocity
 }
+
+
+export const calculateRadius = (mass) => {
+    if (!mass) return (1 / 109) * SUN_RADIUS; // Default: raio da Terra
+    if (mass < 10) {
+        return Math.pow(mass, 0.3) * (1 / 109) * SUN_RADIUS; // Planetas rochosos
+    } else {
+        return Math.pow(mass, 0.5) * (1 / 109) * SUN_RADIUS; // Gigantes gasosos
+    }
+};
