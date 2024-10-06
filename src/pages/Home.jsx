@@ -7,6 +7,14 @@ import Scene from "../components/Scene";
 import '../assets/styles/Home.css';
 import { Link } from 'react-router-dom';
 import AnimatedSpriteTalking from '../components/AnimatedSpriteTalking'; // Importa corretamente o componente de animação
+import React, { useState, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { Physics } from "@react-three/rapier";
+import Scene from "../components/Scene";
+import "../assets/styles/Home.css";
+import { TypeAnimation } from "react-type-animation";
 
 const FocusOnSunWithZoom = () => {
     const { camera } = useThree();
@@ -108,6 +116,32 @@ const Home = () => {
                 <p className="start-text">Press any key or click to start</p>
             )}
 
+      {showInfoCard && (
+        <div className="info-card">
+        <h2>   <TypeAnimation
+      sequence={[
+        'One', // Types 'One'
+        1000, // Waits 1s
+        'Two', // Deletes 'One' and types 'Two'
+        2000, // Waits 2s
+        'Two Three', // Types 'Three' without deleting 'Two'
+        () => {
+          console.log('Sequence completed'); // Place optional callbacks anywhere in the array
+        }
+      ]}
+      wrapper="span"
+      cursor={true}
+      repeat={Infinity}
+      style={{ fontSize: '2em', display: 'inline-block' }}
+    />
+         </h2>
+          <p>
+            Here you can explore the solar system. Use the controls to navigate
+            through space!
+          </p>
+          <button onClick={handleNextClick}>Next</button>
+        </div>
+      )}
             {showInfoCard && (
                 <>
                     <div className="info-card">
