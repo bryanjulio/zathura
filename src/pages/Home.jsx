@@ -7,6 +7,7 @@ import Scene from "../components/Scene";
 import '../assets/styles/Home.css';
 import { Link } from 'react-router-dom';
 import AnimatedSpriteTalking from '../components/AnimatedSpriteTalking'; // Importa corretamente o componente de animação
+import { TypeAnimation } from 'react-type-animation';
 
 
 const FocusOnSunWithZoom = () => {
