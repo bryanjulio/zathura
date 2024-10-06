@@ -1,6 +1,6 @@
 // src/Exoplanet.jsx
 
-import React, { useMemo } from 'react';
+import  { useMemo } from 'react';
 import { useTexture } from '@react-three/drei';
 import { Color } from 'three';
 

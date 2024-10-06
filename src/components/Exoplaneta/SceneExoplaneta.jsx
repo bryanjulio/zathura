@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { Stars, OrbitControls } from '@react-three/drei';
 import Exoplanet from './Exoplanet';
 import InfoCard from './InfoCard';
-import exoplanetData from '/dados_exoplanetas.json'; // Importe o arquivo JSON
+import exoplanetData from '@/data/dados_exoplanetas.json'; // Importe o arquivo JSON
 import {calculateRadius} from '../../utils/planetCalculations';
 
 function AppExoplanet() {
