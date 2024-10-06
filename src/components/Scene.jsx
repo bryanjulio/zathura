@@ -4,6 +4,7 @@ import { CameraProvider } from '../context/Camera'
 import { TrailProvider } from '../context/Trails'
 
 import Sun from './Sun'
+import Earth from './Earth'
 import Stars from './Stars'
 import Planets from './Planets'
 
@@ -17,9 +18,11 @@ const Scene = () => {
            
                 <Sun />
 
-                <TrailProvider>
+                <Earth />
+
+                {/* <TrailProvider>
                     <Planets />
-                </TrailProvider>
+                </TrailProvider> */}
 
                 <Stars />
        

@@ -1,0 +1,35 @@
+/* App.css */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(36, 36, 36, 0.8); /* Fundo semi-transparente */
+  padding: 1rem 2rem;
+  z-index: 1000; /* Garante que o nav fique acima dos outros elementos */
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav ul li a:hover {
+  color: #646cff;
+}
+
+.main-content {
+  flex: 1;
+  height: 100vh;
+}
