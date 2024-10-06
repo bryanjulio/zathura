@@ -34,17 +34,34 @@ function AppExoplanet() {
 
       {/* Card de informação */}
       <div style={{ position: 'absolute', top: 20, left: 20 }}>
-        <InfoCard
-          title={`Exoplaneta ${exoplanet.pl_name}`}
-          content={<> <h2>{exoplanet.pl_name}</h2>
-          <p><strong>ID do Planeta:</strong> {exoplanet.id}</p>
-          <p><strong>Estrela Hospedeira:</strong> {exoplanet.hostname}</p>
-          <p><strong>Massa (Massas Terrestres):</strong> {exoplanet.pl_masse || 'Desconhecido'}</p>
-          <p><strong>Raio (Raios Terrestres):</strong> {calculateRadius(exoplanet.pl_masse) || 'Indefinido'}</p>
-          <p><strong>Distância Orbital (UA):</strong> {exoplanet.pl_orbsmax || 'Desconhecido'}</p>
-          <p><strong>Temperatura de Equilíbrio (K):</strong> {exoplanet.pl_eqt || 'Desconhecido'}</p>
-          </>}
-        />
+      <InfoCard
+  title={`Exoplaneta ${exoplanet.pl_name}`}
+  content={
+    <>
+      <h2 className="w-8/12 text-xl font-bold mb-6">{exoplanet.pl_name}</h2> {/* Aumentei o margin-bottom */}
+      <p className="mb-4 p-2"> {/* Aumentei o margin-bottom */}
+        <strong>ID do Planeta:</strong> {exoplanet.id}
+      </p>
+      <p className="mb-4"> {/* Aumentei o margin-bottom */}
+        <strong>Estrela Hospedeira:</strong> {exoplanet.hostname}
+      </p>
+      <p className="mb-4"> {/* Aumentei o margin-bottom */}
+        <strong>Massa (Massas Terrestres):</strong> {exoplanet.pl_masse || 'Desconhecido'}
+      </p>
+      <p className="mb-4"> {/* Aumentei o margin-bottom */}
+        <strong>Raio (Raios Terrestres):</strong> {calculateRadius(exoplanet.pl_masse) || 'Indefinido'}
+      </p>
+      <p className="mb-4"> {/* Aumentei o margin-bottom */}
+        <strong>Distância Orbital (UA):</strong> {exoplanet.pl_orbsmax || 'Desconhecido'}
+      </p>
+      <p className="mb-4"> {/* Aumentei o margin-bottom */}
+        <strong>Temperatura de Equilíbrio (K):</strong> {exoplanet.pl_eqt || 'Desconhecido'}
+      </p>
+    </>
+  }
+/>
+
+
       </div>
     </div>
   );
