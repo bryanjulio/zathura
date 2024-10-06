@@ -15,13 +15,11 @@ const Scene = () => {
 
     return (
         <CameraProvider>
-           
-                <Sun />
-
+            <Sun />
+            <TrailProvider>
                 <Earth />
-
-                <Stars />
-       
+            </TrailProvider>
+            <Stars />
         </CameraProvider>
     )
     /*
