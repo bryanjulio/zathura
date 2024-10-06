@@ -85,7 +85,7 @@ const Home = () => {
             }, 1000);  // Tempo para a animação de fade-out do astronauta
         }
     };
-
+ 
     return (
         <div className="app-container">
             <Link to="/about" className="top-right-link">About</Link>
