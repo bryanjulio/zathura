@@ -12,7 +12,7 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/exoplanet/:id" element={<AppExoplanet />} /> {/* Rota com parâmetro */}
+          <Route path="/exoplanet/:id" element={<AppExoplanet />} /> 
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
