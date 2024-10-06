@@ -6,26 +6,14 @@ import { TrailProvider } from '../context/Trails'
 import Sun from './Sun'
 import Earth from './Earth'
 import Stars from './Stars'
-import Planets from './Planets'
 
-// Scene component
 const Scene = () => {
-    // Custom hook for gravity logic
     useGravity()
-
-    return (
+    return (    
         <CameraProvider>
-           
-                <Sun />
-
-                <Earth />
-
-                {/* <TrailProvider>
-                    <Planets />
-                </TrailProvider> */}
-
-                <Stars />
-       
+            <Sun />
+            <Earth />
+            <Stars />
         </CameraProvider>
     )
 }
