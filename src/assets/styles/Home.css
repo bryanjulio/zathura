@@ -1,0 +1,132 @@
+.app-container, .about-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.start-text {
+  position: absolute;
+  bottom: 5%; /* Posição na parte inferior da tela */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente */
+  font-size: 20px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1.5px;
+  z-index: 20; /* Garante que o texto fique acima do overlay */
+}
+
+.info-card {
+  position: absolute;
+  top: 40%;
+  left: 70%; /* Diminuí o valor de 45% para 40% para mover mais à esquerda */
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  z-index: 20;
+}
+
+
+.controls {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.control-btn {
+  padding: 10px 20px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-btn:hover {
+  background-color: lightgray;
+}
+
+/* Animação de pulsação */
+@keyframes pulse {
+  0% {
+      opacity: 0.9;
+  }
+  50% {
+      opacity: 0.7;
+  }
+  100% {
+      opacity: 0.9;
+  }
+}
+
+/* Estilo do overlay escuro */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Começa com uma opacidade de 0.9 */
+  z-index: 10;
+  opacity: 0.9; /* O overlay inicia com 0.9 de opacidade */
+  animation: pulse 2s infinite ease-in-out; /* Animação de pulsação */
+  transition: opacity 4s ease-in-out; /* Transição suave de 4 segundos para desaparecer */
+}
+
+/* Classe de fade-out que remove a pulsação */
+.fade-out {
+  animation: none; /* Remove a animação de pulsação */
+  opacity: 0; /* Fica totalmente transparente após 4 segundos */
+  pointer-events: none; /* Desabilita interação com o overlay após desaparecer */
+}
+
+/* Estilos gerais para Home e About */
+.top-right-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: white;  /* Garanta que seja branco */
+  text-decoration: none;
+  z-index: 100;  /* Para garantir que fique à frente de outros elementos */
+  transition: text-shadow 0.3s ease;
+}
+
+
+.top-right-link:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Brilho ao passar o mouse */
+}
+
+.astronaut-animation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 80vh; /* O astronauta ocupará até 80% da altura da tela */
+  z-index: 25;
+  overflow: hidden;
+  box-sizing: border-box;
+  opacity: 0; /* Inicia invisível */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.astronaut-animation.show {
+  opacity: 1; /* Torna o astronauta visível */
+}
+
+.astronaut-animation img {
+  height: 100%;
+  width: auto;
+  margin: 0; /* Remova qualquer margem que possa causar o scroll */
+  padding: 0; /* Remova qualquer padding extra */
+  display: block; /* Garante que a imagem se comporte como um bloco, evitando espaços extras */
+  border: none; /* Remove qualquer borda */
+  overflow: hidden; /* Impede qualquer overflow de causar scroll */
+}
