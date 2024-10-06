@@ -9,6 +9,7 @@ import "../assets/styles/Home.css";
 import { Link } from "react-router-dom";
 import AnimatedSpriteTalking from "../components/AnimatedSpriteTalking"; // Importa corretamente o componente de animação
 import { TypeAnimation } from "react-type-animation";
+import HWO from "../components/HWO";
 
 
 const FocusOnSunWithZoom = () => {
@@ -214,8 +215,8 @@ const Home = () => {
 
       {canControlView && (
         <div className="controls">
-          <button className="btn">Guided Tour</button>
-          <button className="btn">Free Navigation</button>
+          <Link className="btn">Guided Tour</Link>
+          <Link to="/hwo" className="btn">Free Navigation</Link>
         </div>
       )}
     </div>

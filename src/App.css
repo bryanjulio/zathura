@@ -1,12 +1,11 @@
-/* App.css */
 nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(36, 36, 36, 0.8); /* Fundo semi-transparente */
+  background-color: rgba(36, 36, 36, 0.8);
   padding: 1rem 2rem;
-  z-index: 1000; /* Garante que o nav fique acima dos outros elementos */
+  z-index: 1000;
   display: flex;
   justify-content: center;
 }
