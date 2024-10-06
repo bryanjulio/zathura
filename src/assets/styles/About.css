@@ -28,7 +28,7 @@ canvas {
     width: 60%;
     margin-top: -75%;
     max-width: 800px;
-    margin: 50px auto;
+    margin: -700px auto;
     font-family: Arial, sans-serif;
     font-size: 16px;
     text-align: center;
@@ -69,7 +69,7 @@ canvas {
 button {
     margin: 10px 10px 0 10px;
     /* Espaçamento entre botões */
-    padding: 10px 20px;
+    padding: 60px 60px; 
     /* Espaçamento interno do botão */
     background-color: #007BFF;
     /* Cor de fundo azul */
@@ -101,4 +101,15 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* Adiciona sombra à foto */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    /* Centraliza os botões */
+    gap: 10px;
+    /* Adiciona espaçamento horizontal entre os botões */
+    margin-top: 20px;
+    /* Espaçamento acima dos botões */
+
 }

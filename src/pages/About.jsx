@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import Scene from "../components/LandingScene";
-import '../assets/styles/About.css'; 
-import groupPhoto from '../assets/photos/photo.jpeg'; 
-import { useNavigate } from 'react-router-dom'; 
+import '../assets/styles/About.css';
+import groupPhoto from '../assets/photos/photo.jpeg';
+import { useNavigate } from 'react-router-dom';
 
 
 const FocusOnSunWithZoom = () => {
@@ -40,7 +40,7 @@ const About = () => {
   };
 
   const handleHomeClick = () => {
-    navigate('/'); 
+    navigate('/');
   };
 
   return (
@@ -74,8 +74,9 @@ const About = () => {
             <p>
               The HWO mission is part of a continuous effort to expand our understanding of the universe and explore the mysteries of exoplanets, with a particular focus on finding and studying potentially habitable worlds. With our application, we hope to provide a tool that helps scientists and engineers better understand the impact of different telescope parameters and potentially optimize future missions.
             </p>
-
-            <button onClick={handleNextClick}>Next</button>
+            <div className="button-container">
+              <button onClick={handleNextClick}>Next</button>
+            </div>
           </>
         )}
 
@@ -94,9 +95,10 @@ const About = () => {
             <p>
               Tools like <strong>GitHub</strong> for version control, <strong>Trello</strong> for task management, and <strong>Slack</strong> for internal communication were essential to keeping everyone aligned with the project's objectives.
             </p>
-
-            <button onClick={handleBackClick}>Back</button>
-            <button onClick={handleNextClick}>Next</button>
+            <div className="button-container">
+              <button onClick={handleBackClick}>Back</button>
+              <button onClick={handleNextClick}>Next</button>
+            </div>
           </>
         )}
 
@@ -119,8 +121,10 @@ const About = () => {
             </ul>
 
             <img src={groupPhoto} alt="Group Photo" className="group-photo" />
-            <button onClick={handleBackClick}>Back</button>
-            <button onClick={handleHomeClick}>Home</button> 
+            <div className="button-container">
+              <button onClick={handleBackClick}>Back</button>
+              <button onClick={handleHomeClick}>Home</button>
+            </div>
           </>
         )}
       </div>
