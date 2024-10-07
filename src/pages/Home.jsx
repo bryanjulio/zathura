@@ -7,22 +7,23 @@ import Scene from "../components/Scene";
 
 import "../assets/styles/Home.css";
 import { Link } from "react-router-dom";
-import AnimatedSpriteTalking from "../components/AnimatedSpriteTalking"; // Importa corretamente o componente de animação
+import AnimatedSpriteTalking from "../components/AnimatedSpriteTalking";
 import { TypeAnimation } from "react-type-animation";
 import HWO from "../components/HWO";
 
+import introAudio from '../assets/audio/intro.mp3';
+import audio2 from '../assets/audio/audio2.mp3';
+import audio3 from '../assets/audio/audio3.mp3';
 
 const FocusOnSunWithZoom = () => {
   const { camera } = useThree();
-  const targetPosition = { x: 0, y: 20, z: 50 }; // Posição final da câmera (zoom próximo do Sol)
-  const speed = 0.05; // Velocidade da animação (quanto menor, mais suave)
+  const targetPosition = { x: 0, y: 20, z: 50 };
+  const speed = 0.05;
 
   useFrame(() => {
     camera.position.x += (targetPosition.x - camera.position.x) * speed;
     camera.position.y += (targetPosition.y - camera.position.y) * speed;
     camera.position.z += (targetPosition.z - camera.position.z) * speed;
-
-    // Mantém a câmera olhando para o Sol (centro da cena)
     camera.lookAt(0, 0, 0);
   });
 
@@ -33,36 +34,60 @@ const Home = () => {
   const [hasStarted, setHasStarted] = useState(false);
   const [showInfoCard, setShowInfoCard] = useState(false);
   const [canControlView, setCanControlView] = useState(false);
-  const [startZoom, setStartZoom] = useState(false); // Controla quando iniciar o zoom
-  const [overlayActive, setOverlayActive] = useState(true); // Controla a exibição do overlay
-  const [fadeOut, setFadeOut] = useState(false); // Controla a transição de fade-out
-  const [cardStep, setCardStep] = useState(1); // Controla o passo do card
-  const [astronautReaction, setAstronautReaction] = useState("normal"); // Controla a reação do astronauta
-  const [astronautVisible, setAstronautVisible] = useState(true); // Controla a visibilidade do astronauta
+  const [startZoom, setStartZoom] = useState(false);
+  const [overlayActive, setOverlayActive] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [cardStep, setCardStep] = useState(1);
+  const [astronautReaction, setAstronautReaction] = useState("normal");
+  const [astronautVisible, setAstronautVisible] = useState(true);
+
+  // Adiciona controle de áudio
+  const [audio, setAudio] = useState(new Audio(introAudio)); // Inicializa o áudio com o intro.mp3
 
   useEffect(() => {
     const startAction = () => {
-      console.log("Tecla pressionada ou clique detectado");
       setHasStarted(true);
       setShowInfoCard(true);
-      setFadeOut(true); // Inicia o fade-out do overlay
+      setFadeOut(true);
 
-      // Espera a transição terminar (4 segundos) para remover o overlay
+      // Inicia a reprodução do áudio de introdução
+      audio.play();
+
       setTimeout(() => {
-        setOverlayActive(false); // Remove o overlay após o fade-out completo
-      }, 4000); // Tempo da transição de clareamento suave (ajustado para 4 segundos)
+        setOverlayActive(false);
+      }, 4000);
     };
 
     if (!hasStarted) {
       window.addEventListener("keydown", startAction);
-      window.addEventListener("click", startAction); // Adiciona suporte para cliques do mouse
+      window.addEventListener("click", startAction);
     }
 
     return () => {
       window.removeEventListener("keydown", startAction);
-      window.removeEventListener("click", startAction); // Remove o evento de clique quando não necessário
+      window.removeEventListener("click", startAction);
     };
-  }, [hasStarted]);
+  }, [hasStarted, audio]);
+
+  // Função para tocar o áudio correspondente e parar o áudio anterior
+  const playAudio = (step) => {
+    // Pausa o áudio anterior, se estiver tocando
+    audio.pause();
+    audio.currentTime = 0; // Reseta o tempo de execução do áudio anterior
+
+    let newAudioSrc;
+    if (step === 1) newAudioSrc = introAudio;
+    if (step === 2) newAudioSrc = audio2;
+    if (step === 3) newAudioSrc = audio3;
+
+    const newAudio = new Audio(newAudioSrc);
+    setAudio(newAudio); // Atualiza o áudio atual para o novo
+    newAudio.play(); // Reproduz o novo áudio
+  };
+
+  useEffect(() => {
+    playAudio(cardStep); // Reproduz o áudio correspondente sempre que o cardStep mudar
+  }, [cardStep]);
 
   // Função para lidar com o clique no botão Next e mudar o conteúdo do card
   const handleNextClick = () => {
@@ -73,24 +98,21 @@ const Home = () => {
       } else if (prevStep === 2) {
         setAstronautReaction("thumbsUp");
         return 3;
-      }  else if (prevStep === 3) {
-        // Aqui implementamos o fade-out do astronauta
-        setAstronautVisible(false); // Inicia o fade-out do astronauta
+      } else if (prevStep === 3) {
+        setAstronautVisible(false);
         setTimeout(() => {
-          setShowInfoCard(false); // Após o fade-out, esconde o card
-          setStartZoom(true); // Ativa o zoom
+          setShowInfoCard(false);
+          setStartZoom(true);
           setTimeout(() => {
-            setCanControlView(true); // Habilita o controle da câmera depois do zoom
-          }, 3000); // Tempo para a animação de zoom
-        }, 1000); // Tempo para a animação de fade-out do astronauta
-        return prevStep; // Não incrementa mais o cardStep, já que estamos no último passo
+            setCanControlView(true);
+          }, 3000);
+        }, 1000);
+        return prevStep;
       } else {
         return prevStep;
       }
     });
   };
-  
-  
 
   return (
     <div className="app-container">
@@ -101,10 +123,8 @@ const Home = () => {
         <color attach="background" args={["black"]} />
         <ambientLight intensity={0.25} />
 
-        {/* Animação de zoom, quando o usuário clica em "Next" */}
         {startZoom && <FocusOnSunWithZoom />}
 
-        {/* OrbitControls são ativados apenas quando canControlView é true */}
         {canControlView && (
           <OrbitControls maxDistance={450} minDistance={10} makeDefault />
         )}
@@ -124,88 +144,75 @@ const Home = () => {
 
       {!hasStarted && (
         <TypeAnimation className="start-text"
-        key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-        sequence={[
-          'Press any key or click to start', // Texto a ser escrito
-          1000, // Pausa de 1 segundo
-        ]}
-        speed={75}
-        wrapper="span"
-        cursor={true}  // Mostra o cursor piscando
-        repeat={0}  // Não repete a animação
-      />
+          key={cardStep}
+          sequence={[
+            'Press any key or click to start',
+            1000,
+          ]}
+          speed={75}
+          wrapper="span"
+          cursor={true}
+          repeat={0}
+        />
       )}
 
-      
       {showInfoCard && (
-  <>
-    <div className="info-card">
-      {/* O conteúdo do card muda de acordo com o cardStep */}
-      {cardStep === 1 ? (
         <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'Hi there! I’m Walter, your guide on this space adventure. Today, we’re going to explore distant planets and discover new worlds through the HWO, NASA’s newest telescope. It’s designed to find Earth-like planets around nearby stars and search for signs of life. Ready to dive in?', // Texto a ser escrito
-              1000, // Pausa de 1 segundo
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}  // Mostra o cursor piscando
-            repeat={0}  // Não repete a animação
-          />
-        </>
-      ) : cardStep === 2 ? (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'The HWO is positioned at Lagrange Point 2 (L2), 1.5 million km from Earth, where it has a perfect view of deep space.', // Novo texto da segunda etapa
-              1000, // Pausa de 1 segundo
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
-        </>
-      ) : cardStep === 3 ? (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'In this app, you’ll explore exoplanets through HWO’s eyes, learning about planets that might support life. Join me on a guided tour or explore freely!', // Novo texto da terceira etapa
-              1000,
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
-        </>
-      ) : (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'All steps are completed.', // Texto quando todas as etapas são concluídas
-              1000,
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={false}  // Cursor desaparece ao final
-            repeat={0}
-          />
+          <div className="info-card">
+            {cardStep === 1 ? (
+              <TypeAnimation
+                key={cardStep}
+                sequence={[
+                  'Hi there! I’m Walter, your guide on this space adventure. Today, we’re going to explore distant planets and discover new worlds through the HWO, NASA’s newest telescope. It’s designed to find Earth-like planets around nearby stars and search for signs of life. Ready to dive in?',
+                  1000,
+                ]}
+                speed={75}
+                wrapper="span"
+                cursor={true}
+                repeat={0}
+              />
+            ) : cardStep === 2 ? (
+              <TypeAnimation
+                key={cardStep}
+                sequence={[
+                  'The HWO is positioned at Lagrange Point 2 (L2), 1.5 million km from Earth, where it has a perfect view of deep space.',
+                  1000,
+                ]}
+                speed={75}
+                wrapper="span"
+                cursor={true}
+                repeat={0}
+              />
+            ) : cardStep === 3 ? (
+              <TypeAnimation
+                key={cardStep}
+                sequence={[
+                  'In this app, you’ll explore exoplanets through HWO’s eyes, learning about planets that might support life. Join me on a guided tour or explore freely!',
+                  1000,
+                ]}
+                speed={75}
+                wrapper="span"
+                cursor={true}
+                repeat={0}
+              />
+            ) : (
+              <TypeAnimation
+                key={cardStep}
+                sequence={[
+                  'All steps are completed.',
+                  1000,
+                ]}
+                speed={75}
+                wrapper="span"
+                cursor={false}
+                repeat={0}
+              />
+            )}
+            <button className="fixed-btn" onClick={handleNextClick}>Next</button>
+          </div>
         </>
       )}
-      <button className="fixed-btn" onClick={handleNextClick}>Next</button>
-    </div>
-  </>
-)}
 
-
-
-      {/* Exibe a animação do astronauta */}
       {showInfoCard && (
         <AnimatedSpriteTalking
           reacao={astronautReaction}

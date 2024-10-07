@@ -1,0 +1,10 @@
+[33me7b0c63[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/trail[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/exoplanets_details[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: rebase (finish): returning to refs/heads/main
+[33me7b0c63[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/trail[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/exoplanets_details[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: rebase (start): checkout origin
+[33md075175[m[33m ([m[1;31morigin/about[m[33m, [m[1;32mabout[m[33m)[m HEAD@{2}: commit: att about
+[33m1305697[m HEAD@{3}: pull origin main: Merge made by the 'ort' strategy.
+[33mb72cf1a[m HEAD@{4}: commit: Atualiza página About e adiciona novos estilos e componentes
+[33m13ed6de[m HEAD@{5}: checkout: moving from main to about
+[33m9f2a4bf[m HEAD@{6}: rebase (finish): returning to refs/heads/main
+[33m9f2a4bf[m HEAD@{7}: rebase (start): checkout origin
+[33m715ebf9[m HEAD@{8}: pull --tags origin main: Fast-forward
+[33m1f7cdc1[m HEAD@{9}: clone: from https://github.com/bryanjulio/zathura.git
