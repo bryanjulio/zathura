@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import AnimatedSpriteTalking from "../components/AnimatedSpriteTalking"; // Importa corretamente o componente de animação
 import { TypeAnimation } from "react-type-animation";
 import HWO from "../components/HWO";
+import TrailCard from "../components/Trilha/TrailCard";
 
 
 const FocusOnSunWithZoom = () => {
@@ -73,7 +74,7 @@ const Home = () => {
       } else if (prevStep === 2) {
         setAstronautReaction("thumbsUp");
         return 3;
-      }  else if (prevStep === 3) {
+      } else if (prevStep === 3) {
         // Aqui implementamos o fade-out do astronauta
         setAstronautVisible(false); // Inicia o fade-out do astronauta
         setTimeout(() => {
@@ -89,8 +90,8 @@ const Home = () => {
       }
     });
   };
-  
-  
+
+
 
   return (
     <div className="app-container">
@@ -124,84 +125,84 @@ const Home = () => {
 
       {!hasStarted && (
         <TypeAnimation className="start-text"
-        key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-        sequence={[
-          'Press any key or click to start', // Texto a ser escrito
-          1000, // Pausa de 1 segundo
-        ]}
-        speed={75}
-        wrapper="span"
-        cursor={true}  // Mostra o cursor piscando
-        repeat={0}  // Não repete a animação
-      />
+          key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+          sequence={[
+            'Press any key or click to start', // Texto a ser escrito
+            1000, // Pausa de 1 segundo
+          ]}
+          speed={75}
+          wrapper="span"
+          cursor={true}  // Mostra o cursor piscando
+          repeat={0}  // Não repete a animação
+        />
       )}
 
-      
+
       {showInfoCard && (
-  <>
-    <div className="info-card">
-      {/* O conteúdo do card muda de acordo com o cardStep */}
-      {cardStep === 1 ? (
         <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'Hi there! I’m Walter, your guide on this space adventure. Today, we’re going to explore distant planets and discover new worlds through the HWO, NASA’s newest telescope. It’s designed to find Earth-like planets around nearby stars and search for signs of life. Ready to dive in?', // Texto a ser escrito
-              1000, // Pausa de 1 segundo
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}  // Mostra o cursor piscando
-            repeat={0}  // Não repete a animação
-          />
-        </>
-      ) : cardStep === 2 ? (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'The HWO is positioned at Lagrange Point 2 (L2), 1.5 million km from Earth, where it has a perfect view of deep space.', // Novo texto da segunda etapa
-              1000, // Pausa de 1 segundo
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
-        </>
-      ) : cardStep === 3 ? (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'In this app, you’ll explore exoplanets through HWO’s eyes, learning about planets that might support life. Join me on a guided tour or explore freely!', // Novo texto da terceira etapa
-              1000,
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
-        </>
-      ) : (
-        <>
-          <TypeAnimation
-            key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
-            sequence={[
-              'All steps are completed.', // Texto quando todas as etapas são concluídas
-              1000,
-            ]}
-            speed={75}
-            wrapper="span"
-            cursor={false}  // Cursor desaparece ao final
-            repeat={0}
-          />
+          <div className="info-card">
+            {/* O conteúdo do card muda de acordo com o cardStep */}
+            {cardStep === 1 ? (
+              <>
+                <TypeAnimation
+                  key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+                  sequence={[
+                    'Hi there! I’m Walter, your guide on this space adventure. Today, we’re going to explore distant planets and discover new worlds through the HWO, NASA’s newest telescope. It’s designed to find Earth-like planets around nearby stars and search for signs of life. Ready to dive in?', // Texto a ser escrito
+                    1000, // Pausa de 1 segundo
+                  ]}
+                  speed={75}
+                  wrapper="span"
+                  cursor={true}  // Mostra o cursor piscando
+                  repeat={0}  // Não repete a animação
+                />
+              </>
+            ) : cardStep === 2 ? (
+              <>
+                <TypeAnimation
+                  key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+                  sequence={[
+                    'The HWO is positioned at Lagrange Point 2 (L2), 1.5 million km from Earth, where it has a perfect view of deep space.', // Novo texto da segunda etapa
+                    1000, // Pausa de 1 segundo
+                  ]}
+                  speed={75}
+                  wrapper="span"
+                  cursor={true}
+                  repeat={0}
+                />
+              </>
+            ) : cardStep === 3 ? (
+              <>
+                <TypeAnimation
+                  key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+                  sequence={[
+                    'In this app, you’ll explore exoplanets through HWO’s eyes, learning about planets that might support life. Join me on a guided tour or explore freely!', // Novo texto da terceira etapa
+                    1000,
+                  ]}
+                  speed={75}
+                  wrapper="span"
+                  cursor={true}
+                  repeat={0}
+                />
+              </>
+            ) : (
+              <>
+                <TypeAnimation
+                  key={cardStep}  // Adiciona a key para forçar o re-render ao mudar o cardStep
+                  sequence={[
+                    'All steps are completed.', // Texto quando todas as etapas são concluídas
+                    1000,
+                  ]}
+                  speed={75}
+                  wrapper="span"
+                  cursor={false}  // Cursor desaparece ao final
+                  repeat={0}
+                />
+              </>
+            )}
+            <button className="fixed-btn" onClick={handleNextClick}>Next</button>
+          </div>
         </>
       )}
-      <button className="fixed-btn" onClick={handleNextClick}>Next</button>
-    </div>
-  </>
-)}
 
 
 
@@ -215,10 +216,11 @@ const Home = () => {
 
       {canControlView && (
         <div className="controls">
-          <Link className="btn">Guided Tour</Link>
+          <Link to="/trail-card" className="btn">Guided Tour</Link>
           <Link to="/hwo" className="btn">Free Navigation</Link>
         </div>
       )}
+
     </div>
   );
 };
